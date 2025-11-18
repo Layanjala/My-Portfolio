@@ -14,15 +14,18 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout the repo
+      # 1️⃣ Checkout the repo (fetch full history to be safe)
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # 2️⃣ Setup Node
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       # 3️⃣ Install dependencies (ignore peer deps)
       - name: Install dependencies
@@ -33,10 +36,11 @@ jobs:
         run: rm -rf .next out
 
       # 5️⃣ Build and export Next.js site
-      - name: Build Next.js
-        run: 
+      # Ensure your package.json has an `export` script (e.g. "export": "next export")
+      - name: Build and export Next.js
+        run: |
           npm run build
-         
+          npm run export
 
       # 6️⃣ Upload static site artifact
       - name: Upload artifact
