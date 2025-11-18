@@ -1,8 +1,6 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
 	output: "export",
-	basePath: "/My-Portfolio",
-	assetPrefix: "/My-Portfolio/",
+	// Remove basePath and assetPrefix
 	images: {
 		unoptimized: true,
 	},
