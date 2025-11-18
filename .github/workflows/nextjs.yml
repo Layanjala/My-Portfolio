@@ -33,10 +33,10 @@ jobs:
         run: rm -rf .next out
 
       # 5️⃣ Build and export Next.js site
-      - name: Build and export Next.js
-        run: |
+      - name: Build Next.js
+        run: 
           npm run build
-          npm run export
+         
 
       # 6️⃣ Upload static site artifact
       - name: Upload artifact
