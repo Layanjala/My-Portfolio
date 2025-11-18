@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Layan Jala Yasashrini Jayasundara | Python Developer & Data Analyst',
-  description: 'Portfolio of Layan Jala Yasashrini Jayasundara - BSc Computer Science student specializing in Python, Django, Flask, and Data Analysis.',
+  title: 'Layanjala Yasashrini Jayasundara | Python Developer & Data Analyst',
+  description: 'Portfolio of Layanjala Yasashrini Jayasundara - BSc Computer Science student specializing in Python, Django, Flask, and Data Analysis.',
   generator: 'v0.app',
   icons: {
     icon: [

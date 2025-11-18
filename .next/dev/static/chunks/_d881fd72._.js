@@ -202,7 +202,7 @@ function About() {
                                     style: {
                                         color: '#3D3E65'
                                     },
-                                    children: "I'm a BSc Honours Computer Science and Technology undergraduate at Uva Wellassa University of Sri Lanka. I'm passionate about software development and data science, with a strong focus on Python ecosystem technologies."
+                                    children: "Motivated Computer Science undergraduate with a strong passion for software development. Seeking a Software Engineer Internship to apply problem-solving abilities and technical expertise. Skilled in learning new technologies and dedicated to contributing effectively to development team objectives."
                                 }, void 0, false, {
                                     fileName: "[project]/components/about.tsx",
                                     lineNumber: 35,

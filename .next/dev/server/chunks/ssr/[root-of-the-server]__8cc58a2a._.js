@@ -72,8 +72,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$vercel$2f$
 ;
 ;
 const metadata = {
-    title: 'Layan Jala Yasashrini Jayasundara | Python Developer & Data Analyst',
-    description: 'Portfolio of Layan Jala Yasashrini Jayasundara - BSc Computer Science student specializing in Python, Django, Flask, and Data Analysis.',
+    title: 'Layanjala Yasashrini Jayasundara | Python Developer & Data Analyst',
+    description: 'Portfolio of Layanjala Yasashrini Jayasundara - BSc Computer Science student specializing in Python, Django, Flask, and Data Analysis.',
     generator: 'v0.app',
     icons: {
         icon: [
