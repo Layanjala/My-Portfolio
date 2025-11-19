@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 export function About() {
@@ -23,7 +24,7 @@ export function About() {
 	return (
 		<section id="about" className="py-16 md:py-24 px-4" ref={ref}>
 			<div className="max-w-6xl mx-auto">
-				<h2
+				{/* <h2
 					className={`text-4xl font-bold mb-12 text-center drop-shadow-[0_0_25px_rgba(216,180,254,0.7)] transition-all duration-700 ${
 						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
 					}`}
@@ -32,7 +33,46 @@ export function About() {
 					}}
 				>
 					About Me
-				</h2>
+				</h2> */}
+
+				<div className="relative flex items-center justify-center">
+					{/* Smoke Layer */}
+					<motion.div
+						initial={{ opacity: 0, scale: 0.6, filter: "blur(20px)" }}
+						animate={{ opacity: 1, scale: 1.3, filter: "blur(30px)" }}
+						transition={{
+							duration: 1.2,
+							ease: "easeOut",
+						}}
+						className="absolute w-48 h-48 bg-purple-500/40 rounded-full"
+					/>
+
+					{/* Smoke moves back + stays */}
+					<motion.div
+						initial={{ opacity: 1, scale: 1.3 }}
+						animate={{ opacity: 0.5, scale: 1 }}
+						transition={{
+							delay: 1.2,
+							duration: 1,
+							ease: "easeOut",
+						}}
+						className="absolute w-48 h-48 bg-purple-500/20 rounded-full blur-2xl"
+					/>
+
+					{/* Text Reveal */}
+					<motion.p
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{
+							delay: 0.9,
+							duration: 0.6,
+							ease: "easeOut",
+						}}
+						className="relative text-4xl font-bold text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
+					>
+						About Me
+					</motion.p>
+				</div>
 
 				<div className="grid md:grid-cols-2 gap-12 items-center">
 					<div
