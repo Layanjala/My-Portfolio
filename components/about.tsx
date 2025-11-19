@@ -193,36 +193,37 @@ export function About() {
 								</li>
 							))}
 						</ul>
-						<div className="relative w-full h-32 my-12">
-							{/* Cat walks across */}
-							<motion.div
-								className="absolute flex items-center gap-2"
-								initial={{ x: "100%" }}
-								animate={{ x: "-10%" }}
-								transition={{
-									repeat: Infinity,
-									repeatType: "loop",
-									duration: 8,
-									ease: "linear",
-								}}
-							>
-								{/* Cat image or emoji */}
-								<div className="w-12 h-12">
-									<Image
-										src="/download.gif" // replace with your cat image
-										alt="cat"
-										width={48}
-										height={48}
-									/>
-								</div>
-
-								{/* Following text/badge */}
-								<div className="bg-purple-500/50 text-white px-3 py-1 rounded-lg shadow-lg">
-									Active IEEE Member
-								</div>
-							</motion.div>
-						</div>
 					</div>
+				</div>
+
+				<div className="relative w-full h-32 my-12">
+					{/* Cat walks across */}
+					<motion.div
+						className="absolute flex items-center gap-2"
+						initial={{ x: "100%" }}
+						animate={{ x: "-10%" }}
+						transition={{
+							repeat: Infinity,
+							repeatType: "loop",
+							duration: 8,
+							ease: "linear",
+						}}
+					>
+						{/* Cat image or emoji */}
+						<div className="w-12 h-12">
+							<Image
+								src="/download-unscreen.gif" // replace with your cat image
+								alt="cat"
+								width={64}
+								height={64}
+							/>
+						</div>
+
+						{/* Following text/badge */}
+						<div className="bg-purple-500/50 text-white px-3 py-1 rounded-lg shadow-lg">
+							Active IEEE Member
+						</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>
