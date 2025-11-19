@@ -8,7 +8,7 @@ import { Footer } from "@/components/footer";
 
 export default function Home() {
 	return (
-		<div className="min-h-screen gradient-hero">
+		<div className="min-h-screen gradient-dark">
 			<Header />
 			<Hero />
 			<About />

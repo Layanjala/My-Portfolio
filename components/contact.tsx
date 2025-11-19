@@ -63,7 +63,7 @@ export function Contact() {
 	return (
 		<section
 			id="contact"
-			className="py-12 md:py-16 px-4 overflow-hidden bg-gradient-to-b from-white/90 via-[#F5F3F0]/90 to-white/90"
+			className="py-12 md:py-16 px-4 overflow-hidden"
 			ref={ref}
 		>
 			<div className="max-w-6xl mx-auto">
