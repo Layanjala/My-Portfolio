@@ -68,7 +68,7 @@ export function About() {
 							duration: 0.6,
 							ease: "easeOut",
 						}}
-						className="relative text-4xl font-bold text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
+						className="relative mb-8 text-4xl font-bold text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
 					>
 						About Me
 					</motion.p>
