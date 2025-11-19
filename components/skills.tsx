@@ -42,7 +42,7 @@ export function Skills() {
 	return (
 		<section
 			id="skills"
-			className="py-16 md:py-24 px-4 gradient-hero"
+			className="py-16 md:py-24 px-4 bg-gradient-to-b from-white via-[#F5F3F0] to-white"
 			ref={ref}
 		>
 			<div className="max-w-6xl mx-auto">
