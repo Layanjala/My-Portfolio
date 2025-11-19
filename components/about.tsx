@@ -35,28 +35,28 @@ export function About() {
 					About Me
 				</h2> */}
 
-				<div className="relative flex items-center justify-center">
-					{/* Smoke Layer */}
+				<div className="relative flex flex-col items-center justify-center mb-12">
+					{/* Smoke Layer (appears first, oval shape) */}
 					<motion.div
 						initial={{ opacity: 0, scale: 0.6, filter: "blur(20px)" }}
-						animate={{ opacity: 1, scale: 1.3, filter: "blur(30px)" }}
+						animate={{ opacity: 1, scale: 1.1, filter: "blur(25px)" }}
 						transition={{
 							duration: 1.2,
 							ease: "easeOut",
 						}}
-						className="absolute w-48 h-48 bg-purple-500/40 rounded-full"
+						className="absolute w-72 h-20 bg-purple-500/40 rounded-full"
 					/>
 
-					{/* Smoke moves back + stays */}
+					{/* Smoke settles behind text */}
 					<motion.div
-						initial={{ opacity: 1, scale: 1.3 }}
+						initial={{ opacity: 1, scale: 1.1 }}
 						animate={{ opacity: 0.5, scale: 1 }}
 						transition={{
 							delay: 1.2,
 							duration: 1,
 							ease: "easeOut",
 						}}
-						className="absolute w-48 h-48 bg-purple-500/20 rounded-full blur-2xl"
+						className="absolute w-72 h-20 bg-purple-500/20 rounded-full blur-2xl"
 					/>
 
 					{/* Text Reveal */}
