@@ -92,7 +92,7 @@ export function Projects() {
 	return (
 		<section
 			id="projects"
-			className="py-16 md:py-24 px-4 bg-gradient-to-b from-white via-[#F5F3F0] to-white"
+			className="py-16 md:py-24 px-4 gradient-hero"
 			ref={ref}
 		>
 			<div className="max-w-6xl mx-auto">
