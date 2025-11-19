@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export function Hero() {
 	return (
-		<section id="home" className="gradient-hero text-white py-20 md:py-32 px-4">
+		<section id="home" className="text-white py-20 md:py-32 px-4">
 			<div className="max-w-6xl mx-auto">
 				<div className="flex flex-col md:flex-row items-center justify-center gap-12 mb-12">
 					{/* Photo Section */}

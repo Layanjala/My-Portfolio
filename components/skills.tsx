@@ -40,11 +40,7 @@ export function Skills() {
 	];
 
 	return (
-		<section
-			id="skills"
-			className="py-16 md:py-24 px-4 bg-gradient-to-b from-white via-[#F5F3F0] to-white"
-			ref={ref}
-		>
+		<section id="skills" className="py-16 md:py-24 px-4" ref={ref}>
 			<div className="max-w-6xl mx-auto">
 				<h2
 					className={`text-4xl font-bold mb-12 text-center transition-all duration-700 ${
