@@ -44,7 +44,7 @@ export function About() {
 							duration: 1.2,
 							ease: "easeOut",
 						}}
-						className="absolute w-72 h-20 bg-purple-500/40 rounded-full"
+						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/40 rounded-full -translate-x-1/2 -translate-y-1/2"
 					/>
 
 					{/* Smoke settles behind text */}
@@ -56,7 +56,7 @@ export function About() {
 							duration: 1,
 							ease: "easeOut",
 						}}
-						className="absolute w-72 h-20 bg-purple-500/20 rounded-full blur-2xl"
+						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/20 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"
 					/>
 
 					{/* Text Reveal */}
