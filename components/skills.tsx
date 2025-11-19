@@ -46,7 +46,7 @@ export function Skills() {
 					className={`text-4xl font-bold mb-12 text-center transition-all duration-700 ${
 						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
 					}`}
-					style={{ color: "#3D348B" }}
+					style={{ color: "#d0beb5" }}
 				>
 					Skills & Expertise
 				</h2>

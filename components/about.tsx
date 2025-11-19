@@ -28,7 +28,7 @@ export function About() {
 						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
 					}`}
 					style={{
-						color: "#3D348B",
+						color: "#d0beb5",
 					}}
 				>
 					About Me
@@ -43,7 +43,7 @@ export function About() {
 						<p
 							className="text-lg leading-relaxed"
 							style={{
-								color: "#3D3E65",
+								color: "#c2e7d9",
 							}}
 						>
 							Motivated Computer Science undergraduate with a strong passion for
@@ -56,7 +56,7 @@ export function About() {
 						<p
 							className="text-lg leading-relaxed"
 							style={{
-								color: "#3D3E65",
+								color: "#c2e7d9",
 							}}
 						>
 							As a quick learner and motivated individual, I continuously
@@ -74,7 +74,7 @@ export function About() {
 							<h3
 								className="text-xl font-semibold mb-4"
 								style={{
-									color: "#5F1773",
+									color: "#f9e4ffff",
 								}}
 							>
 								Education

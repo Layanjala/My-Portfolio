@@ -72,7 +72,7 @@ export function Contact() {
 						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
 					}`}
 					style={{
-						color: "#3D348B",
+						color: "#d0beb5",
 					}}
 				>
 					Get In Touch
