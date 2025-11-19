@@ -86,7 +86,7 @@ export function Skills() {
 						}}
 						className="relative mb-8 text-4xl font-bold text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
 					>
-						Skills
+						Skills & Expertise
 					</motion.p>
 				</div>
 				<div className="grid md:grid-cols-2 gap-8">
