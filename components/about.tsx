@@ -24,7 +24,7 @@ export function About() {
 		<section id="about" className="py-16 md:py-24 px-4" ref={ref}>
 			<div className="max-w-6xl mx-auto">
 				<h2
-					className={`text-4xl font-bold mb-12 text-center transition-all duration-700 ${
+					className={`text-4xl font-bold mb-12 text-center drop-shadow-[0_0_25px_rgba(216,180,254,0.7)] transition-all duration-700 ${
 						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
 					}`}
 					style={{
