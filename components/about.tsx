@@ -82,9 +82,9 @@ export function About() {
 					>
 						<p
 							className="text-lg leading-relaxed"
-							style={{
-								color: "#c2e7d9",
-							}}
+							// style={{
+							// 	color: "#c2e7d9",
+							// }}
 						>
 							Motivated Computer Science undergraduate with a strong passion for
 							software development. Seeking a Software Engineer Internship to

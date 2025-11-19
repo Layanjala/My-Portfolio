@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Mail, Phone, Github, Linkedin } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -67,7 +68,7 @@ export function Contact() {
 			ref={ref}
 		>
 			<div className="max-w-6xl mx-auto">
-				<h2
+				{/* <h2
 					className={`text-4xl font-bold mb-8 text-center transition-all duration-700 ${
 						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
 					}`}
@@ -76,7 +77,45 @@ export function Contact() {
 					}}
 				>
 					Get In Touch
-				</h2>
+				</h2> */}
+				<div className="relative flex flex-col items-center justify-center mb-12">
+					{/* Smoke Layer (appears first, oval shape) */}
+					<motion.div
+						initial={{ opacity: 0, scale: 0.6, filter: "blur(20px)" }}
+						animate={{ opacity: 1, scale: 1.1, filter: "blur(25px)" }}
+						transition={{
+							duration: 1.2,
+							ease: "easeOut",
+						}}
+						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/40 rounded-full -translate-x-1/2 -translate-y-1/2"
+					/>
+
+					{/* Smoke settles behind text */}
+					<motion.div
+						initial={{ opacity: 1, scale: 1.1 }}
+						animate={{ opacity: 0.5, scale: 1 }}
+						transition={{
+							delay: 1.2,
+							duration: 1,
+							ease: "easeOut",
+						}}
+						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/20 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"
+					/>
+
+					{/* Text Reveal */}
+					<motion.p
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{
+							delay: 0.9,
+							duration: 0.6,
+							ease: "easeOut",
+						}}
+						className="relative mb-8 text-4xl font-bold text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
+					>
+						Get In Touch
+					</motion.p>
+				</div>
 
 				{/* Icons Flow Animation Container */}
 				<div className="relative h-48 md:h-64 flex items-center justify-center">
