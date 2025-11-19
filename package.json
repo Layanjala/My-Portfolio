@@ -4,11 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
-		"export": "next export",
-		"start": "next start",
-		"predeploy": "npm run build && npm run export",
-		"deploy": "gh-pages -d out"
+		"build": "next build"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.10.0",

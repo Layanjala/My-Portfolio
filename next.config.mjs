@@ -1,6 +1,7 @@
 const nextConfig = {
 	output: "export",
-	// Remove basePath and assetPrefix
+	basePath: "/My-Portfolio",
+	assetPrefix: "/My-Portfolio/",
 	images: {
 		unoptimized: true,
 	},
