@@ -1,20 +1,34 @@
+import { Background3D } from "@/components/background-3d";
+import { CursorGlow } from "@/components/cursor-glow";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { About } from "@/components/about";
+import { Experience } from "@/components/experience";
 import { Skills } from "@/components/skills";
 import { Projects } from "@/components/projects";
+import { Leadership } from "@/components/leadership";
+import { Certifications } from "@/components/certifications";
+import { Strengths } from "@/components/strengths";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 
 export default function Home() {
 	return (
-		<div className="min-h-screen gradient-dark">
+		<div className="relative min-h-screen overflow-x-clip bg-ink-900">
+			<Background3D />
+			<CursorGlow />
 			<Header />
-			<Hero />
-			<About />
-			<Skills />
-			<Projects />
-			<Contact />
+			<main className="relative z-10">
+				<Hero />
+				<About />
+				<Experience />
+				<Skills />
+				<Projects />
+				<Leadership />
+				<Certifications />
+				<Strengths />
+				<Contact />
+			</main>
 			<Footer />
 		</div>
 	);

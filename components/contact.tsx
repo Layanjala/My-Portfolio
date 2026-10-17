@@ -1,196 +1,83 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Mail, Phone, Github, Linkedin } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { NetworkCanvas } from "@/components/network-canvas";
+import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
+import { links } from "@/lib/links";
+
+const channels = [
+	{ icon: Mail, label: "Email", value: links.emailAddress, href: links.email, external: true },
+	{ icon: Linkedin, label: "LinkedIn", value: "Yasashrini Jayasundara", href: links.linkedin, external: true },
+	{ icon: Github, label: "GitHub", value: "github.com/Layanjala", href: links.github, external: true },
+	{ icon: Phone, label: "Phone", value: links.phoneDisplay, href: links.phone, external: false },
+];
 
 export function Contact() {
-	const [isVisible, setIsVisible] = useState(false);
-	const [animationStarted, setAnimationStarted] = useState(false);
-	const ref = useRef(null);
-
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					setIsVisible(true);
-					// Start the animation when section becomes visible
-					setTimeout(() => setAnimationStarted(true), 500);
-				}
-			},
-			{ threshold: 0.1 }
-		);
-
-		if (ref.current) observer.observe(ref.current);
-		return () => observer.disconnect();
-	}, []);
-
-	const handleRestartAnimation = () => {
-		setAnimationStarted(false);
-		setTimeout(() => setAnimationStarted(true), 100);
-	};
-
-	const contactIcons = [
-		{
-			icon: Mail,
-			href: "https://mail.google.com/mail/?view=cm&fs=1&to=layanjalajayasundara@gmail.com?subject=Hello%20Layanjala&body=Hi%20Layanjala%2C%0D%0A%0D%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect.",
-			title: "Email",
-			side: "left",
-			position: 0,
-		},
-		{
-			icon: Phone,
-			href: "tel:+94711371419",
-			title: "Phone",
-			side: "left",
-			position: 1,
-		},
-		{
-			icon: Github,
-			href: "https://github.com/Layanjala",
-			title: "GitHub",
-			side: "right",
-			position: 0,
-		},
-		{
-			icon: Linkedin,
-			href: "https://www.linkedin.com/in/yasashrini-jayasundara-a5b422221/",
-			title: "LinkedIn",
-			side: "right",
-			position: 1,
-		},
-	];
-
 	return (
-		<section
-			id="contact"
-			className="py-12 md:py-16 px-4 overflow-hidden"
-			ref={ref}
-		>
-			<div className="max-w-6xl mx-auto">
-				{/* <h2
-					className={`text-4xl font-bold mb-8 text-center transition-all duration-700 ${
-						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
-					}`}
-					style={{
-						color: "#d0beb5",
-					}}
-				>
-					Get In Touch
-				</h2> */}
-				<div className="relative flex flex-col items-center justify-center mb-12">
-					{/* Smoke Layer (appears first, oval shape) */}
-					<motion.div
-						initial={{ opacity: 0, scale: 0.6, filter: "blur(20px)" }}
-						animate={{ opacity: 1, scale: 1.1, filter: "blur(25px)" }}
-						transition={{
-							duration: 1.2,
-							ease: "easeOut",
-						}}
-						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/40 rounded-full -translate-x-1/2 -translate-y-1/2"
-					/>
+		<section id="contact" className="relative overflow-hidden px-4 py-24 sm:px-6 md:py-32">
+			<div className="mx-auto max-w-6xl">
+				<div className="glass-panel relative overflow-hidden rounded-[2rem] px-6 py-14 sm:px-12 md:py-20">
+					{/* Connected-node network behind the content */}
+					<NetworkCanvas className="pointer-events-none absolute inset-0 h-full w-full opacity-70 lg:left-1/3" />
+					<div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-900 via-ink-900/80 to-transparent" />
 
-					{/* Smoke settles behind text */}
-					<motion.div
-						initial={{ opacity: 1, scale: 1.1 }}
-						animate={{ opacity: 0.5, scale: 1 }}
-						transition={{
-							delay: 1.2,
-							duration: 1,
-							ease: "easeOut",
-						}}
-						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/20 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"
-					/>
-
-					{/* Text Reveal */}
-					<motion.p
-						initial={{ opacity: 0, y: 10 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{
-							delay: 0.9,
-							duration: 0.6,
-							ease: "easeOut",
-						}}
-						className="relative mb-8 text-4xl font-bold text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
-					>
-						Get In Touch
-					</motion.p>
-				</div>
-
-				{/* Icons Flow Animation Container */}
-				<div className="relative h-48 md:h-64 flex items-center justify-center">
-					{/* Rotating center circle */}
-					<div
-						className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-gradient-to-r from-[#C2E7D9] to-[#3D348B] opacity-80 transition-all duration-1000 ${
-							animationStarted
-								? "scale-150 rotate-180 opacity-0"
-								: "scale-100 rotate-0 opacity-80"
-						}`}
-					/>
-
-					{/* Contact icons flowing from center */}
-					<div className="relative w-full h-full">
-						{contactIcons.map((item, index) => {
-							const Icon = item.icon;
-							const isLeft = item.side === "left";
-							const delay = index * 200 + 500; // Start after circle rotation
-
-							// Calculate vertical positions with proper spacing
-							const verticalPositions: Record<"left" | "right", string[]> = {
-								left: ["35%", "65%"], // Two positions for left side
-								right: ["35%", "65%"], // Two positions for right side
-							};
-
-							const verticalPosition =
-								verticalPositions[item.side as "left" | "right"][item.position];
-
-							return (
-								<div
-									key={index}
-									className={`absolute top-1/2 transform -translate-y-1/2 transition-all duration-1000 ease-out ${
-										animationStarted
-											? `opacity-100 ${
-													isLeft ? "left-16 md:left-32" : "right-16 md:right-32"
-											  }`
-											: "left-1/2 right-1/2 opacity-0 scale-50"
-									}`}
-									style={{
-										transitionDelay: `${delay}ms`,
-										transform: animationStarted
-											? `translateY(-50%)`
-											: "translateY(-50%) translateX(-50%)",
-										top: animationStarted ? verticalPosition : "50%",
-									}}
+					<div className="relative max-w-2xl">
+						<Reveal>
+							<p className="mb-4 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-brand-cyan">
+								<span className="h-px w-8 bg-gradient-to-r from-transparent to-brand-cyan" />
+								Contact
+							</p>
+						</Reveal>
+						<Reveal delay={0.1}>
+							<h2 className="font-display text-4xl font-bold leading-tight tracking-tight text-fg sm:text-5xl md:text-6xl">
+								Let&apos;s Turn Data Into <span className="text-gradient">Meaningful Insights.</span>
+							</h2>
+						</Reveal>
+						<Reveal delay={0.2}>
+							<p className="mt-6 text-lg leading-relaxed text-fg-muted">
+								I&apos;m always excited to explore opportunities in data analytics, business intelligence,
+								data engineering, and software development.
+							</p>
+						</Reveal>
+						<Reveal delay={0.3}>
+							<div className="mt-9 flex flex-wrap items-center gap-4">
+								<a
+									href={links.email}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-violet to-brand-blue px-7 py-3.5 font-semibold text-white shadow-[0_10px_40px_-10px_rgba(139,92,246,0.8)] transition-transform duration-300 hover:-translate-y-0.5"
 								>
-									<a
-										href={item.href}
-										target={item.href.startsWith("http") ? "_blank" : undefined}
-										rel={
-											item.href.startsWith("http")
-												? "noopener noreferrer"
-												: undefined
-										}
-										className="flex flex-col items-center transition-all duration-300 hover:scale-110"
-										title={item.title}
-									>
-										<div
-											className="inline-flex items-center justify-center w-16 h-16 rounded-full hover:shadow-lg glass"
-											style={{
-												backgroundColor: "#C2E7D9",
-											}}
-										>
-											<Icon
-												size={28}
-												style={{
-													color: "#3D348B",
-												}}
-											/>
-										</div>
-									</a>
-								</div>
-							);
-						})}
+									<Mail size={18} />
+									Get In Touch
+									<ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+								</a>
+								<span className="inline-flex items-center gap-2 text-sm text-fg-muted">
+									<MapPin size={16} className="text-brand-cyan" /> {links.location}
+								</span>
+							</div>
+						</Reveal>
 					</div>
+
+					<Stagger className="relative mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
+						{channels.map(({ icon: Icon, label, value, href, external }) => (
+							<StaggerItem key={label}>
+								<a
+									href={href}
+									target={external ? "_blank" : undefined}
+									rel={external ? "noopener noreferrer" : undefined}
+									className="group flex h-full items-center gap-4 rounded-2xl border border-line bg-ink-950/50 p-4 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-cyan/40"
+								>
+									<span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-violet/30 to-brand-cyan/20 text-brand-cyan transition-transform duration-300 group-hover:scale-110">
+										<Icon size={20} />
+									</span>
+									<span className="min-w-0">
+										<span className="block font-mono text-[11px] uppercase tracking-widest text-fg-subtle">{label}</span>
+										<span className="block truncate text-sm font-medium text-fg">{value}</span>
+									</span>
+								</a>
+							</StaggerItem>
+						))}
+					</Stagger>
 				</div>
 			</div>
 		</section>

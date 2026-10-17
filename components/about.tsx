@@ -1,228 +1,317 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+	Award,
+	CalendarDays,
+	GraduationCap,
+	Landmark,
+	Star,
+	Users,
+} from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
+import { SectionHeading } from "@/components/section-heading";
+import { TiltCard } from "@/components/tilt-card";
 
-export function About() {
-	const [isVisible, setIsVisible] = useState(false);
-	const ref = useRef(null);
+const facts = [
+	{ icon: GraduationCap, label: "Degree", value: "BSc (Hons) Computer Science and Technology" },
+	{ icon: Landmark, label: "University", value: "Uva Wellassa University of Sri Lanka" },
+	{ icon: CalendarDays, label: "Duration", value: "2022 – Present" },
+	{ icon: Star, label: "Current cumulative GPA", value: "3.67" },
+	{ icon: Award, label: "Academic standing", value: "Dean's List" },
+	{ icon: Users, label: "IEEE", value: "Active member · Former WIE Chairperson" },
+];
+
+// Titles that follow the ghost across the screen
+const ghostTrail = [
+	"Intern BI Support Executive",
+	"IEEE WIE Chairperson",
+	"IEEE SLI Finance Vice Chair",
+	"Student Leader · Bank of Ceylon",
+	"Active IEEE Member",
+];
+
+// Profile photo that flips on load (and on click) to reveal a waving "Hi There!" bubble
+function ProfilePhoto() {
+	const [flipped, setFlipped] = useState(false);
 
 	useEffect(() => {
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry.isIntersecting) {
-					setIsVisible(true);
-				}
-			},
-			{ threshold: 0.1 }
-		);
-
-		if (ref.current) observer.observe(ref.current);
-		return () => observer.disconnect();
+		const timer = setTimeout(() => setFlipped(true), 800);
+		return () => clearTimeout(timer);
 	}, []);
 
 	return (
-		<section id="about" className="py-16 md:py-24 px-4" ref={ref}>
-			<div className="max-w-6xl mx-auto">
-				{/* <h2
-					className={`text-4xl font-bold mb-12 text-center drop-shadow-[0_0_25px_rgba(216,180,254,0.7)] transition-all duration-700 ${
-						isVisible ? "animate-fade-in-up" : "opacity-0 translate-y-10"
-					}`}
-					style={{
-						color: "#d0beb5",
-					}}
+		<div className="flex flex-col items-center">
+			<motion.div
+				className="relative"
+				style={{ perspective: 1000, transformStyle: "preserve-3d" }}
+				animate={{ y: [0, -10, 0] }}
+				transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+			>
+				<div className="orbit-ring orbit-ring-1" />
+				<div className="orbit-ring orbit-ring-2" />
+				<motion.button
+					type="button"
+					aria-label="Flip profile photo"
+					className="relative block h-44 w-44 cursor-pointer overflow-hidden rounded-full ring-2 ring-brand-violet/50 shadow-[0_0_60px_rgba(139,92,246,0.55)] sm:h-52 sm:w-52"
+					onClick={() => setFlipped((prev) => !prev)}
+					animate={{ rotateY: flipped ? 360 : 0, scale: flipped ? 1.06 : 1 }}
+					transition={{ duration: 0.9, ease: "easeInOut" }}
 				>
-					About Me
-				</h2> */}
-
-				<div className="relative flex flex-col items-center justify-center mb-12">
-					{/* Smoke Layer (appears first, oval shape) */}
-					<motion.div
-						initial={{ opacity: 0, scale: 0.6, filter: "blur(20px)" }}
-						animate={{ opacity: 1, scale: 1.1, filter: "blur(25px)" }}
-						transition={{
-							duration: 1.2,
-							ease: "easeOut",
-						}}
-						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/40 rounded-full -translate-x-1/2 -translate-y-1/2"
+					<Image
+						src="/Proffesional headshot.png"
+						alt="Portrait of Layanjala Yasashrini Jayasundara"
+						fill
+						sizes="208px"
+						className="object-cover"
 					/>
+				</motion.button>
+			</motion.div>
 
-					{/* Smoke settles behind text */}
-					<motion.div
-						initial={{ opacity: 1, scale: 1.1 }}
-						animate={{ opacity: 0.5, scale: 1 }}
-						transition={{
-							delay: 1.2,
-							duration: 1,
-							ease: "easeOut",
-						}}
-						className="absolute left-1/2 top-1/2 w-72 h-20 bg-purple-500/20 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"
-					/>
+			<div className="mt-10 h-10">
+				<AnimatePresence>
+					{flipped && (
+						<motion.div
+							className="glass-panel flex items-center gap-2 rounded-full px-4 py-2"
+							initial={{ opacity: 0, y: -10 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -10 }}
+							transition={{ duration: 0.5, delay: 0.6 }}
+						>
+							<motion.span
+								className="text-xl"
+								animate={{ rotate: [0, 20, -20, 20, -20, 0] }}
+								transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
+							>
+								👋
+							</motion.span>
+							<span className="font-semibold text-fg">Hi There!</span>
+						</motion.div>
+					)}
+				</AnimatePresence>
+			</div>
+		</div>
+	);
+}
 
-					{/* Text Reveal */}
-					<motion.p
-						initial={{ opacity: 0, y: 10 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{
-							delay: 0.9,
-							duration: 0.6,
-							ease: "easeOut",
-						}}
-						className="relative mb-8 text-4xl font-bold text-white drop-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
-					>
-						About Me
-					</motion.p>
+// Illustrative mini dashboard: a line chart that draws itself, growing bars and a donut ring
+function InsightDashboard() {
+	const bars = [42, 68, 55, 82, 64, 90, 74];
+
+	return (
+		<TiltCard intensity={8}>
+			<div className="glass-panel gradient-border rounded-2xl p-5 sm:p-6">
+				<div className="mb-5 flex items-center justify-between">
+					<div className="flex gap-1.5">
+						<span className="h-2.5 w-2.5 rounded-full bg-brand-violet/70" />
+						<span className="h-2.5 w-2.5 rounded-full bg-brand-blue/70" />
+						<span className="h-2.5 w-2.5 rounded-full bg-brand-cyan/70" />
+					</div>
+					<span className="font-mono text-xs text-fg-subtle">data → model → insight</span>
 				</div>
 
-				<div className="grid md:grid-cols-2 gap-12 items-center">
-					<div
-						className={`space-y-6 transition-all duration-700 ${
-							isVisible ? "animate-slide-in-left" : "opacity-0 -translate-x-10"
-						}`}
-					>
-						<p
-							className="text-lg leading-relaxed"
-							// style={{
-							// 	color: "#c2e7d9",
-							// }}
-						>
-							Motivated Computer Science undergraduate with a strong passion for
-							software development. Seeking a Software Engineer Internship to
-							apply problem-solving abilities and technical expertise. Skilled
-							in learning new technologies and dedicated to contributing
-							effectively to development team objectives.
-						</p>
+				{/* Line chart */}
+				<div className="rounded-xl border border-line bg-ink-950/40 p-4">
+					<p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-fg-subtle">Trend</p>
+					<svg viewBox="0 0 300 100" className="h-28 w-full" aria-hidden>
+						<defs>
+							<linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
+								<stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.35" />
+								<stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+							</linearGradient>
+							<linearGradient id="trendLine" x1="0" y1="0" x2="1" y2="0">
+								<stop offset="0%" stopColor="#8b5cf6" />
+								<stop offset="100%" stopColor="#22d3ee" />
+							</linearGradient>
+						</defs>
+						{[25, 50, 75].map((y) => (
+							<line key={y} x1="0" x2="300" y1={y} y2={y} stroke="rgba(148,163,214,0.12)" strokeDasharray="4 6" />
+						))}
+						<motion.path
+							d="M0 80 C 30 70, 50 72, 75 60 S 120 30, 150 42 S 200 70, 225 40 S 270 18, 300 14 L 300 100 L 0 100 Z"
+							fill="url(#trendFill)"
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}
+							viewport={{ once: true }}
+							transition={{ delay: 1, duration: 1 }}
+						/>
+						<motion.path
+							d="M0 80 C 30 70, 50 72, 75 60 S 120 30, 150 42 S 200 70, 225 40 S 270 18, 300 14"
+							fill="none"
+							stroke="url(#trendLine)"
+							strokeWidth="2.5"
+							strokeLinecap="round"
+							initial={{ pathLength: 0 }}
+							whileInView={{ pathLength: 1 }}
+							viewport={{ once: true }}
+							transition={{ duration: 1.8, ease: "easeInOut" }}
+						/>
+					</svg>
+				</div>
 
-						<p
-							className="text-lg leading-relaxed"
-							// style={{
-							// 	color: "#c2e7d9",
-							// }}
-						>
-							As a quick learner and motivated individual, I continuously
-							explore new technologies and best practices to build efficient and
-							scalable solutions. My goal is to contribute meaningfully to
-							projects as a Python Developer, Data Analyst, or Data Scientist.
-						</p>
-
-						<div
-							className="pt-4 animate-fade-in-up"
-							style={{
-								animationDelay: "0.2s",
-							}}
-						>
-							<h3
-								className="text-xl font-semibold mb-4"
-								style={{
-									color: "#f9e4ffff",
-								}}
-							>
-								Education
-							</h3>
-							<div
-								className="glass-card p-4 rounded-lg"
-								style={{
-									borderLeft: "4px solid #3D348B",
-								}}
-							>
-								<h4
-									className="font-semibold text-lg"
-									style={{
-										color: "#3D348B",
-									}}
-								>
-									BSc Hons Computer Science and Technology
-								</h4>
-								<p
-									style={{
-										color: "#3D3E65",
-									}}
-								>
-									Uva Wellassa University of Sri Lanka
-								</p>
-								<p className="text-sm opacity-75">Undergraduate</p>
-							</div>
+				<div className="mt-4 grid grid-cols-[1.4fr_1fr] gap-4">
+					{/* Bars */}
+					<div className="rounded-xl border border-line bg-ink-950/40 p-4">
+						<p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-fg-subtle">Categories</p>
+						<div className="flex h-24 items-end gap-1.5">
+							{bars.map((h, i) => (
+								<motion.div
+									key={i}
+									className="flex-1 rounded-t bg-gradient-to-t from-brand-violet to-brand-cyan"
+									initial={{ height: 0 }}
+									whileInView={{ height: `${h}%` }}
+									viewport={{ once: true }}
+									transition={{ delay: 0.3 + i * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+								/>
+							))}
 						</div>
 					</div>
 
-					<div
-						className={`glass-card p-8 rounded-lg transition-all duration-700 ${
-							isVisible ? "animate-slide-in-right" : "opacity-0 translate-x-10"
-						}`}
-					>
-						<h3
-							className="text-2xl font-bold mb-6"
-							style={{
-								color: "#3D348B",
-							}}
-						>
-							Why Work With Me
-						</h3>
-						<ul className="space-y-4">
-							{[
-								"Quick learner and adaptable to new technologies",
-								"Strong problem-solving skills",
-								"Attention to detail and code quality",
-								"Collaborative team player",
-								"Motivated to deliver excellence",
-								"Continuous commitment to learning",
-							].map((item, i) => (
-								<li
-									key={i}
-									className="flex items-start gap-3 animate-fade-in-up"
-									style={{
-										animationDelay: `${0.1 + i * 0.05}s`,
-									}}
-								>
-									<span
-										className="font-bold text-lg mt-1 animate-pulse-subtle"
-										style={{
-											color: "#5F1773",
-										}}
-									>
-										✓
-									</span>
-									<span
-										style={{
-											color: "#3D348B",
-										}}
-									>
-										{item}
-									</span>
-								</li>
-							))}
-						</ul>
+					{/* Donut */}
+					<div className="flex flex-col items-center justify-center rounded-xl border border-line bg-ink-950/40 p-4">
+						<svg viewBox="0 0 100 100" className="h-24 w-24 -rotate-90" aria-hidden>
+							<circle cx="50" cy="50" r="38" fill="none" stroke="rgba(148,163,214,0.15)" strokeWidth="10" />
+							<motion.circle
+								cx="50"
+								cy="50"
+								r="38"
+								fill="none"
+								stroke="#22d3ee"
+								strokeWidth="10"
+								strokeLinecap="round"
+								initial={{ pathLength: 0 }}
+								whileInView={{ pathLength: 0.62 }}
+								viewport={{ once: true }}
+								transition={{ delay: 0.6, duration: 1.4, ease: "easeOut" }}
+							/>
+							<motion.circle
+								cx="50"
+								cy="50"
+								r="24"
+								fill="none"
+								stroke="#8b5cf6"
+								strokeWidth="8"
+								strokeLinecap="round"
+								initial={{ pathLength: 0 }}
+								whileInView={{ pathLength: 0.4 }}
+								viewport={{ once: true }}
+								transition={{ delay: 0.9, duration: 1.4, ease: "easeOut" }}
+							/>
+						</svg>
+						<p className="mt-2 font-mono text-[11px] uppercase tracking-widest text-fg-subtle">Segments</p>
 					</div>
 				</div>
+			</div>
+		</TiltCard>
+	);
+}
 
-				<div className="relative w-full h-32 my-12">
-					{/* Cat walks across */}
+export function About() {
+	return (
+		<section id="about" className="relative px-4 py-24 sm:px-6 md:py-32">
+			<div className="mx-auto max-w-6xl">
+				<SectionHeading eyebrow="About Me" description="A data-driven mind with a builder's toolkit.">
+					Turning data into <span className="text-gradient">decisions</span>
+				</SectionHeading>
+
+				<div className="grid items-center gap-14 lg:grid-cols-2">
+					<div>
+						<Reveal className="mb-10 flex justify-center lg:justify-start lg:pl-10">
+							<ProfilePhoto />
+						</Reveal>
+						<Reveal delay={0.1}>
+							<p className="text-lg leading-relaxed text-fg">
+								Motivated Computer Science undergraduate with a strong interest in business
+								intelligence and data analytics. Currently working as a BI Support Executive Intern,
+								developing Power BI dashboards, data models, and DAX measures.
+							</p>
+						</Reveal>
+						<Reveal delay={0.2}>
+							<p className="mt-5 text-lg leading-relaxed text-fg-muted">
+								Skilled in Microsoft Fabric, data processing, database analysis, and creating
+								data-driven solutions. My interests span Data Analysis, Data Engineering and Science,
+								Python Development, System Administration, and Software Engineering.
+							</p>
+						</Reveal>
+					</div>
+
+					<Reveal delay={0.15}>
+						<InsightDashboard />
+					</Reveal>
+				</div>
+
+				{/* Information cards */}
+				<Stagger className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+					{facts.map(({ icon: Icon, label, value }) => (
+						<StaggerItem key={label}>
+							<div className="glass-panel gradient-border group flex h-full items-start gap-4 rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1">
+								<span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-violet/30 to-brand-cyan/20 text-brand-cyan ring-1 ring-brand-violet/30 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
+									<Icon size={20} />
+								</span>
+								<div>
+									<p className="font-mono text-[11px] uppercase tracking-widest text-fg-subtle">{label}</p>
+									<p className="mt-1 font-semibold text-fg">{value}</p>
+								</div>
+							</div>
+						</StaggerItem>
+					))}
+				</Stagger>
+
+				{/* Ghost floats across the full width, pulling a trail of role badges */}
+				<div className="relative left-1/2 my-16 h-64 w-screen -translate-x-1/2 overflow-hidden md:h-80">
 					<motion.div
-						className="absolute flex items-center gap-2"
-						initial={{ x: "100%" }}
-						animate={{ x: "-10%" }}
+						className="absolute top-1/2 flex items-center gap-4"
+						initial={{ left: "100%", x: "0%" }}
+						animate={{ left: "0%", x: "-100%" }}
 						transition={{
 							repeat: Infinity,
 							repeatType: "loop",
-							duration: 8,
+							duration: 30,
 							ease: "linear",
 						}}
+						style={{ translateY: "-50%" }}
 					>
-						{/* Cat image or emoji */}
-						<div className="w-12 h-12">
+						{/* Ghost bobs up and down while it travels */}
+						<motion.div
+							className="relative h-[155px] w-[100px] shrink-0 drop-shadow-[0_0_35px_rgba(167,139,250,0.85)] md:h-[232px] md:w-[150px]"
+							animate={{ y: [0, -25, 0], rotate: [-4, 4, -4] }}
+							transition={{
+								duration: 2.4,
+								repeat: Infinity,
+								ease: "easeInOut",
+							}}
+						>
+							{/* The GIF is 360x360 but the ghost only fills x 138-222, y 111-241, so crop to it */}
 							<Image
-								src="/download-unscreen.gif" // replace with your cat image
-								alt="cat"
-								width={64}
-								height={64}
+								src="/download-unscreen.gif"
+								alt="Animated ghost mascot"
+								width={360}
+								height={360}
+								className="absolute max-w-none"
+								style={{ width: "428.57%", height: "276.92%", left: "-164.29%", top: "-85.38%" }}
+								unoptimized
 							/>
-						</div>
+						</motion.div>
 
-						{/* Following text/badge */}
-						<div className="bg-purple-500/50 text-white px-3 py-1 rounded-lg shadow-lg">
-							Active IEEE Member
-						</div>
+						{/* Following badges, each bobbing slightly out of step like a trail */}
+						{ghostTrail.map((title, i) => (
+							<motion.div
+								key={title}
+								className="glass-panel whitespace-nowrap rounded-xl px-4 py-2 text-base font-semibold text-fg shadow-[0_0_30px_rgba(139,92,246,0.45)] md:px-5 md:py-2.5 md:text-xl"
+								animate={{ y: [0, -12, 0], scale: [1, 1.05, 1] }}
+								transition={{
+									duration: 2.4,
+									delay: (i + 1) * 0.25,
+									repeat: Infinity,
+									ease: "easeInOut",
+								}}
+							>
+								<span className="mr-2 inline-block h-2 w-2 rounded-full bg-brand-cyan align-middle shadow-[0_0_8px_#22d3ee]" />
+								{title}
+							</motion.div>
+						))}
 					</motion.div>
 				</div>
 			</div>

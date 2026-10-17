@@ -1,15 +1,20 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { MotionProvider } from "@/components/motion-provider";
 import "./globals.css";
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
+const spaceGrotesk = Space_Grotesk({
+	subsets: ["latin"],
+	variable: "--font-space-grotesk",
+});
 
 export const metadata: Metadata = {
-	title: "Layanjala Yasashrini Jayasundara | Python Developer & Data Analyst",
+	title: "Layanjala Yasashrini Jayasundara | Data Analyst & BI Developer",
 	description:
-		"Portfolio of Layanjala Yasashrini Jayasundara - BSc Computer Science student specializing in Python, Django, Flask, and Data Analysis.",
+		"Portfolio of Layanjala Yasashrini Jayasundara - BSc Computer Science undergraduate and BI Support Executive Intern specializing in Power BI, Microsoft Fabric, SQL, and Python data analysis.",
 	generator: "v0.app",
 	icons: {
 		icon: [
@@ -21,13 +26,13 @@ export const metadata: Metadata = {
 				url: "/LJ Favicon.png",
 				media: "(prefers-color-scheme: dark)",
 			},
-			{
-				url: "/LJ Favicon.svg",
-				type: "image/svg+xml",
-			},
 		],
 		apple: "/LJ Favicon.png",
 	},
+};
+
+export const viewport: Viewport = {
+	themeColor: "#070b19",
 };
 
 export default function RootLayout({
@@ -36,9 +41,12 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className="scroll-smooth">
-			<body className={`font-sans antialiased`}>
-				{children}
+		<html
+			lang="en"
+			className={`relative ${geist.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}
+		>
+			<body className="font-sans antialiased">
+				<MotionProvider>{children}</MotionProvider>
 				<Analytics />
 			</body>
 		</html>
