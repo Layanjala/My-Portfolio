@@ -1,28 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import {
-	Award,
-	CalendarDays,
-	GraduationCap,
-	Landmark,
-	Star,
-	Users,
-} from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
+import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { TiltCard } from "@/components/tilt-card";
-
-const facts = [
-	{ icon: GraduationCap, label: "Degree", value: "BSc (Hons) Computer Science and Technology" },
-	{ icon: Landmark, label: "University", value: "Uva Wellassa University of Sri Lanka" },
-	{ icon: CalendarDays, label: "Duration", value: "2022 – Present" },
-	{ icon: Star, label: "Current cumulative GPA", value: "3.67" },
-	{ icon: Award, label: "Academic standing", value: "Dean's List" },
-	{ icon: Users, label: "IEEE", value: "Active member · Former WIE Chairperson" },
-];
 
 // Titles that follow the ghost across the screen
 const ghostTrail = [
@@ -30,7 +13,6 @@ const ghostTrail = [
 	"IEEE WIE Chairperson",
 	"IEEE SLI Finance Vice Chair",
 	"Student Leader · Bank of Ceylon",
-	"Active IEEE Member",
 ];
 
 // Profile photo that flips on load (and on click) to reveal a waving "Hi There!" bubble
@@ -223,16 +205,18 @@ export function About() {
 						</Reveal>
 						<Reveal delay={0.1}>
 							<p className="text-lg leading-relaxed text-fg">
-								Motivated Computer Science undergraduate with a strong interest in business
-								intelligence and data analytics. Currently working as a BI Support Executive Intern,
-								developing Power BI dashboards, data models, and DAX measures.
+								Motivated Computer Science and Technology graduate awaiting graduation, with practical
+								experience as a BI Support Executive Intern. Skilled in Power BI, Microsoft Fabric, SQL,
+								data processing, data modelling, and developing insightful dashboards.
 							</p>
 						</Reveal>
 						<Reveal delay={0.2}>
 							<p className="mt-5 text-lg leading-relaxed text-fg-muted">
-								Skilled in Microsoft Fabric, data processing, database analysis, and creating
-								data-driven solutions. My interests span Data Analysis, Data Engineering and Science,
-								Python Development, System Administration, and Software Engineering.
+								Eager to expand my expertise in financial data analytics and apparel industry data,
+								applying technology and analytical thinking to improve business decisions,
+								merchandising, production planning, and supply chain operations. Passionate about
+								continuous learning and exploring opportunities at the intersection of data, finance,
+								and the apparel industry.
 							</p>
 						</Reveal>
 					</div>
@@ -241,23 +225,6 @@ export function About() {
 						<InsightDashboard />
 					</Reveal>
 				</div>
-
-				{/* Information cards */}
-				<Stagger className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					{facts.map(({ icon: Icon, label, value }) => (
-						<StaggerItem key={label}>
-							<div className="glass-panel gradient-border group flex h-full items-start gap-4 rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1">
-								<span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-violet/30 to-brand-cyan/20 text-brand-cyan ring-1 ring-brand-violet/30 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
-									<Icon size={20} />
-								</span>
-								<div>
-									<p className="font-mono text-[11px] uppercase tracking-widest text-fg-subtle">{label}</p>
-									<p className="mt-1 font-semibold text-fg">{value}</p>
-								</div>
-							</div>
-						</StaggerItem>
-					))}
-				</Stagger>
 
 				{/* Ghost floats across the full width, pulling a trail of role badges */}
 				<div className="relative left-1/2 my-16 h-64 w-screen -translate-x-1/2 overflow-hidden md:h-80">

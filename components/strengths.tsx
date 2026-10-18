@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Clock, GraduationCap, Mic, Puzzle, Rocket, Users } from "lucide-react";
+import { Clock, Lightbulb, Mic, Puzzle, Rocket, Users } from "lucide-react";
 import { Stagger, StaggerItem } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 
@@ -11,7 +11,7 @@ const strengths = [
 	{ icon: Puzzle, label: "Problem-solving" },
 	{ icon: Mic, label: "Public speaking and communication" },
 	{ icon: Clock, label: "Effective time management" },
-	{ icon: GraduationCap, label: "Dean's List academic standing" },
+	{ icon: Lightbulb, label: "Bring new ideas" },
 ];
 
 export function Strengths() {

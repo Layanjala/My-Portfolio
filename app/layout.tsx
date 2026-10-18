@@ -14,7 +14,7 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
 	title: "Layanjala Yasashrini Jayasundara | Data Analyst & BI Developer",
 	description:
-		"Portfolio of Layanjala Yasashrini Jayasundara - BSc Computer Science undergraduate and BI Support Executive Intern specializing in Power BI, Microsoft Fabric, SQL, and Python data analysis.",
+		"Portfolio of Layanjala Yasashrini Jayasundara - Computer Science and Technology graduate awaiting graduation and BI Support Executive Intern specializing in Power BI, Microsoft Fabric, SQL, data modelling, and dashboard development.",
 	generator: "v0.app",
 	icons: {
 		icon: [
